@@ -58,6 +58,54 @@ Phasellus faucibus purus eros, vestibulum hendrerit libero faucibus quis.
                     Year = 1990,
                     Rating = 67
                 });
+            Movies.Add(
+                new Movie
+                {
+                    Id = 3,
+                    CategoryId = 2,
+                    Category = Categories.Where(c => c.Id == 2).FirstOrDefault(),
+                    Title = "Die Hard",
+                    Description =
+                @"
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Aliquam sed posuere lacus, bibendum egestas tortor.
+Donec at nisi sodales, interdum neque eget, porta enim. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Phasellus faucibus purus eros, vestibulum hendrerit libero faucibus quis.
+            ",
+                    Year = 1988,
+                    Rating = 76
+                });
+            Movies.Add(
+                new Movie
+                {
+                    Id = 4,
+                    CategoryId = 2,
+                    Category = Categories.Where(c => c.Id == 2).FirstOrDefault(),
+                    Title = "Terminator",
+                    Description =
+                @"
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            Aliquam sed posuere lacus, bibendum egestas tortor.
+                        ",
+                    Year = 1988,
+                    Rating = 76
+                });
+            Movies.Add(
+                new Movie
+                {
+                    Id = 5,
+                    CategoryId = 3,
+                    Category = Categories.Where(c => c.Id == 3).FirstOrDefault(),
+                    Title = "Random drama movie",
+                    Description =
+                @"
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Aliquam sed posuere lacus, bibendum egestas tortor.
+                                    ",
+                    Year = 1988,
+                    Rating = 76
+                });
+
         }
     }
 }
