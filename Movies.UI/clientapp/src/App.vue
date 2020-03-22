@@ -4,7 +4,7 @@
             <div class="top-bar-left">
                 <ul class="menu">
                     <li>
-                        <a href="/">Movies</a>
+                        <router-link to="/">Movies</router-link>
                     </li>
                     <li>
                         <multiselect v-model="selectedCategories" :options="categories" :multiple="true"></multiselect>
@@ -25,13 +25,13 @@
             </div>
         </div>
 
-        <movie-list />
+        <router-view />
     </div>
 </template>
 
 <script>
 
-    import { mapActions, mapGetters, mapMutations } from "vuex";
+    import { mapGetters, mapMutations } from "vuex";
     import MovieList from "./components/MovieList";
     import Multiselect from 'vue-multiselect';
     import Autocomplete from 'vuejs-auto-complete';
@@ -63,7 +63,6 @@
             }
         },
         methods: {
-            ...mapActions(["getData"]),
             ...mapMutations(["setCategories", "setSearchTerm"]),
             selectSearch: function (val) {
                 this.searchTerm = val.value;
@@ -77,9 +76,6 @@
             clear: function () {
                 this.searchTerm = '';
             }
-        },
-        created() {
-            this.getData();
         }
     }
 </script>
