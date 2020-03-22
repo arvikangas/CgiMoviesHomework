@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Movies.Data.InMemory
@@ -25,6 +26,7 @@ namespace Movies.Data.InMemory
                 {
                     Id = 1,
                     CategoryId = 1,
+                    Category = Categories.FirstOrDefault(c => c.Id == 1),
                     Title = "Groundhog Day",
                     Description =
                 @"
@@ -44,6 +46,7 @@ Duis tortor enim, pharetra et ligula id, viverra malesuada nisl. Pellentesque ul
                 {
                     Id = 2,
                     CategoryId = 1,
+                    Category = Categories.FirstOrDefault(c => c.Id == 1),
                     Title = "Home Alone",
                     Description =
                 @"

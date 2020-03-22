@@ -3,6 +3,8 @@ using Movies.Data.InMemory;
 using Movies.Data.Interfaces;
 using Movies.Data.Services;
 using System.Linq;
+using AutoMapper;
+using Movies.Data.Mappings;
 
 namespace Movies.Test
 {
@@ -15,7 +17,9 @@ namespace Movies.Test
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)
         {
-            _movieService = new MovieService(new MovieRepositoryInMemory());
+            var mapperConfig = new MapperConfiguration(cfg => cfg.AddProfile<MovieProfile>());
+            var mapper = mapperConfig.CreateMapper();
+            _movieService = new MovieService(new MovieRepositoryInMemory(), mapper);
         }
 
         [TestMethod]

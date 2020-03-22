@@ -1,4 +1,6 @@
-﻿using Movies.Data.Interfaces;
+﻿using AutoMapper;
+using Movies.Data.Dto;
+using Movies.Data.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +11,26 @@ namespace Movies.Data.Services
     public class MovieService : IMovieService
     {
         IMovieRepository _movieRepository;
-        public MovieService(IMovieRepository movieRepository)
+        IMapper _mapper;
+
+        public MovieService(IMovieRepository movieRepository, IMapper mapper)
         {
             _movieRepository = movieRepository;
+            _mapper = mapper;
         }
 
-        public Movie Get(int id)
+        public MovieDetailsDTO Get(int id)
         {
-            return _movieRepository.GetAll().FirstOrDefault(m => m.Id == id);
+            var movie = _movieRepository.GetAll().FirstOrDefault(m => m.Id == id);
+            var result = _mapper.Map<MovieDetailsDTO>(movie);
+            return result;
         }
 
-        public IList<Movie> GetAll()
+        public IList<MovieDTO> GetAll()
         {
-            return _movieRepository.GetAll().ToList();
+            var movies = _movieRepository.GetAll();
+            var result = _mapper.Map<List<MovieDTO>>(movies);
+            return result;
         }
     }
 }

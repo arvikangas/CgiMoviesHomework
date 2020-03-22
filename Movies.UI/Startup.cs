@@ -4,7 +4,12 @@ using Microsoft.AspNetCore.SpaServices;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Movies.Data.InMemory;
+using Movies.Data.Interfaces;
 using VueCliMiddleware;
+using AutoMapper;
+using Movies.Data.Mappings;
+using Movies.Data.Services;
 
 namespace Movies.UI
 {
@@ -22,14 +27,16 @@ namespace Movies.UI
         {
             services.AddControllersWithViews();
 
-            // Add AddRazorPages if the app uses Razor Pages.
-            services.AddRazorPages();
-
             // In production, the Vue files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddAutoMapper(typeof(MovieProfile).Assembly);
+
+            services.AddTransient(typeof(IMovieRepository), typeof(MovieRepositoryInMemory));
+            services.AddTransient(typeof(IMovieService), typeof(MovieService));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,9 +73,6 @@ namespace Movies.UI
                         npmScript: "serve",
                         regex: "Compiled successfully");
                 }
-
-                // Add MapRazorPages if the app uses Razor Pages. Since Endpoint Routing includes support for many frameworks, adding Razor Pages is now opt -in.
-                endpoints.MapRazorPages();
             });
 
             app.UseSpa(spa =>
