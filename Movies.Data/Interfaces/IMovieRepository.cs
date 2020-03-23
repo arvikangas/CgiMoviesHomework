@@ -7,5 +7,8 @@ namespace Movies.Data.Interfaces
 {
     public interface IMovieRepository : IRepository<Movie>
     {
+        public List<Movie> GetAllMovies();
+
+        public Movie GetMovie(int id);
     }
 }

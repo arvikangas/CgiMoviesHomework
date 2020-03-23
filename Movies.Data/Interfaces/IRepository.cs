@@ -9,5 +9,10 @@ namespace Movies.Data.Interfaces
     public interface IRepository<T> where T : Entity
     {
         IQueryable<T> GetAll();
+
+        T Get(int id);
+        T Create(T entity);
+        T Update(T entity);
+        T Remove(int id);
     }
 }
