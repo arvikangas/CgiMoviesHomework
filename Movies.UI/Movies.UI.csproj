@@ -37,6 +37,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Movies.Data.InMemory\Movies.Data.InMemory.csproj" />
+    <ProjectReference Include="..\Movies.Data.SqLite\Movies.Data.SqLite.csproj" />
     <ProjectReference Include="..\Movies.Data\Movies.Data.csproj" />
   </ItemGroup>
 

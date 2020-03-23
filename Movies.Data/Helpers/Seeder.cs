@@ -1,6 +1,7 @@
 ﻿using Movies.Data.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Movies.Data.Helpers
@@ -9,14 +10,31 @@ namespace Movies.Data.Helpers
     {
         public static void Seed(IMovieRepository movieRepository, ICategoryRepository categoryRepository)
         {
-            var comedyCategory = categoryRepository.Create(new Category { Name = "Comedy" });
-            var actionCategory = categoryRepository.Create(new Category { Name = "Action" });
-            var dramaCategory = categoryRepository.Create(new Category { Name = "Drama" });
+            var comedyCategory = categoryRepository.GetAll().FirstOrDefault(c => c.Name == "Comedy");
+            if (comedyCategory == null)
+            {
+                comedyCategory = categoryRepository.Create(new Category { Name = "Comedy" });
+            }
+            var actionCategory = categoryRepository.GetAll().FirstOrDefault(c => c.Name == "Action");
+            if (actionCategory == null)
+            {
+                actionCategory = categoryRepository.Create(new Category { Name = "Action" });
+            }
+            var dramaCategory = categoryRepository.GetAll().FirstOrDefault(c => c.Name == "Drama");
+            if (dramaCategory == null)
+            {
+                dramaCategory = categoryRepository.Create(new Category { Name = "Drama" });
+            }
+
+            if(movieRepository.GetAll().Any())
+            {
+                return;
+            }
 
             movieRepository.Create(
     new Movie
     {
-        Category = comedyCategory,
+        Category = dramaCategory,
         Title = "Groundhog Day",
         Description =
     @"
