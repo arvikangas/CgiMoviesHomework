@@ -36,6 +36,7 @@ namespace Movies.UI
             services.AddAutoMapper(typeof(MovieProfile).Assembly);
 
             services.AddTransient(typeof(IMovieRepository), typeof(MovieRepositoryInMemory));
+            services.AddTransient(typeof(ICategoryRepository), typeof(CategoryRepositoryInMemory));
             services.AddTransient(typeof(IMovieService), typeof(MovieService));
         }
 
@@ -79,6 +80,18 @@ namespace Movies.UI
             {
                 spa.Options.SourcePath = "clientapp";
             });
+
+            Seed(app);
+
+
+        }
+
+        void Seed(IApplicationBuilder app)
+        {
+            var mr = app.ApplicationServices.GetService<IMovieRepository>();
+            var cr = app.ApplicationServices.GetService<ICategoryRepository>();
+
+            Movies.Data.Helpers.Seeder.Seed(mr, cr);
         }
     }
 }

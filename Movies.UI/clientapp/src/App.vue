@@ -19,7 +19,7 @@
                             placeholder="Search movies"
                             @selected="selectSearch"
                             @nothingSelected="selectSearchNothing"
-                                      @clear="clear"/>
+                            @clear="clear"/>
                     </li>
                 </ul>
             </div>
@@ -32,13 +32,12 @@
 <script>
 
     import { mapGetters, mapMutations } from "vuex";
-    import MovieList from "./components/MovieList";
     import Multiselect from 'vue-multiselect';
     import Autocomplete from 'vuejs-auto-complete';
 
     export default {
         name: 'App',
-        components: { MovieList, Multiselect, Autocomplete },
+        components: { Multiselect, Autocomplete },
         data: function () {
             return {
                 selectedCategories: [],
@@ -69,9 +68,6 @@
             },
             selectSearchNothing: function (val) {
                 this.searchTerm = val || '';
-            },
-            clear: function () {
-                this.searchTerm = '';
             },
             clear: function () {
                 this.searchTerm = '';
